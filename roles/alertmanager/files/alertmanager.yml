@@ -1,18 +1,18 @@
-global:
+global:  # Global configuration for Slack API URL
   slack_api_url: "https://hooks.slack.com/services/SlackWebhookAPI"
 
-route:
-  group_by: ['instance', 'severity']
-  group_wait: 30s
-  group_interval: 5m
-  repeat_interval: 3h
+route:  # Alert routing configuration
+  group_by: ['instance', 'severity']  # Group alerts by instance and severity
+  group_wait: 30s  # Wait 30 seconds for new alerts to be grouped together
+  group_interval: 5m  # Group alerts every 5 minutes
+  repeat_interval: 3h  # Repeat notifications every 3 hours
   routes:
   - match:
-      alertname: InstanceDown
-  receiver: 'alert-team'
+      alertname: InstanceDown  # Match alerts with the alertname "InstanceDown"
+    receiver: 'alert-team'  # Send matched alerts to the receiver "alert-team"
 
-receivers:
+receivers:  # Configuration for alert receivers
 - name: 'alert-team'
-  slack_configs:
-  - channel: "#webhook-test"
-    text: "summary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"
+  slack_configs:  # Slack-specific configuration for the receiver
+  - channel: "#webhook-test"  # Specify the Slack channel for sending alerts
+    text: "summary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"  # Define the text template for the Slack message
