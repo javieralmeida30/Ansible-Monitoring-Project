@@ -1,28 +1,33 @@
----
-- hosts: alertmanager
-  become: yes
-  become_user: root
-  become_method: sudo
-  roles:
-    - alertmanager
+# Playbook to configure monitoring
 
+# Configuration for Alertmanager
+- hosts: alertmanager
+  become: yes  # Execute tasks with elevated privileges
+  become_user: root  # Execute tasks as the root user
+  become_method: sudo  # Use the sudo command for privilege escalation
+  roles:
+    - alertmanager  # Apply the "alertmanager" role to the hosts in the "alertmanager" group
+
+# Configuration for Node Exporter
 - hosts: node_exporter
   become: yes
   become_user: root
   become_method: sudo
   roles:
-    - prometheus_node_exporter
+    - prometheus_node_exporter  # Apply the "prometheus_node_exporter" role to the hosts in the "node_exporter" group
 
+# Configuration for Prometheus
 - hosts: prometheus
   become: yes
   become_user: root
   become_method: sudo
   roles:
-    - prometheus
+    - prometheus  # Apply the "prometheus" role to the hosts in the "prometheus" group
 
+# Configuration for Grafana
 - hosts: grafana
   become: yes
   become_user: root
   become_method: sudo
   roles:
-    - grafana
+    - grafana  # Apply the "grafana" role to the hosts in the "grafana" group
