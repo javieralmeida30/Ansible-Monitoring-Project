@@ -1,11 +1,11 @@
 [prometheus]
-18.219.214.78
+your-monitoring-server-ip
 
 [node_exporter]
-18.222.105.189
+your-monitored-node-ip
 
 [alertmanager]
-18.219.214.78
+your-monitoring-server-ip
 
 [grafana]
-18.223.203.246
+your-grafana-server-ip
